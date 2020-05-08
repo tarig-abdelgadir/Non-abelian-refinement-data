@@ -1,0 +1,256 @@
+\documentclass[12pt]{amsart}
+
+%%%Titles and Authors%%%%%%%%%%%%%%%%%%%%%%
+\title{Non-abelian refinement data}
+
+\author{Tarig Abdelgadir}
+\address{The Abdus Salam International Centre for Theoretical Physics, 
+Stada Costiera 11, 
+Trieste 34151, 
+Italy
+}
+\email{tabdelga@ictp.it}
+
+\author{Daniel Chan}
+\address{School of Mathematics and Statistics, 
+UNSW Sydney, 
+NSW 2052,	
+Australia
+}
+\email{danielc@unsw.edu.au}
+
+%-------------------------Packages-------------------------
+\usepackage{mymacros,amssymb}
+\usepackage{fullpage,tikz}
+\usepackage{tikz-cd}
+\usepackage{pst-node}
+\usetikzlibrary{graphs,angles,quotes,positioning,calc,arrows.meta}
+\usepackage[all]{xy}
+
+%-----------------------Macros-------------------------------
+\newcommand{\Wt}{\textup{Wt}}
+
+%-------------------------Text Starts----------------------
+
+\begin{document}
+\maketitle
+
+Throughout, we work over a base field $k$ of characteristic 0.
+
+\section{Introduction}
+The theory of linear systems is fundamental to algebraic geometry, since it provides the natural way to construct maps to projective space, and morphisms in algebraic geometry are in general comparatively hard to come by. Another way to construct morphisms in algebraic geometry is via the universal property of moduli spaces. It was perhaps King who first realised and exploited the fact that linear systems are just a special example of this. Indeed, given an $n$-dimensional linear system $V \subseteq H^0(X,\cL)$ on a scheme $X$, we may consider the $A_n$-quiver $Q$. 
+Let $\Rep(Q,\vec{1})$ be the affine space of representations of $Q$ of dimension vector $(1,1)$ upon which $PGL:= \bG_m^2/\bG_m$ acts naturally. The rigidified moduli stack of $kQ$-modules of dimension vector $\vec{1}$ is $\bM = \bM(kQ) = \Rep(Q,\vec{1})/PGL$. Now picking a basis for $V$ gives a flat family 
+$$
+\xymatrix{
+\cO_X \ar@<1.5ex>[r] \ar@<-1.5ex>[r]^{\vdots} & \cL
+}
+$$
+of $kQ$-modules over $X$ of dimension vector $\vec{1}$ and hence a morphism $f \colon X \to \bM$. Furthermore, the basepoint free locus $U \subseteq X$ maps into an open substack of $\bM(kQ)$ which is naturally isomorphic to $\bP^n$. 
+
+The above construction also works when $X$ is replaced with a Deligne-Mumford stack $\bX$, but if there are non-trivial stabiliser groups, the ensuing morphism $f$ will not be a closed immersion. 
+To circumvent this, the theory of multi-linear series was invented by [some dudes] where one looks at a collection of line bundles $\cL_1, \ldots, \cL_s$. {\red Tarig: fix history here} In \cite{Abd}, this was done by replacing the quiver algebra $kQ$ with some analogous subalgebra $A$ of $\End_X (\cO_X \oplus \cL_1 \oplus \ldots \oplus \cL_s)$. 
+{\red Need good motivation for refinement data here} 
+One is then tempted to use the rigidified moduli stack of $A$-modules. Unfortunately, this does not work as the stabiliser groups are connected, so the solution there was the incorporation of certain {\em refinement data} into the moduli problem, that is, instead of parametrising $A$-modules, one considers a moduli stack $\bM^{ref}$ of $A$-modules enriched with some refinement data. 
+
+For toric stacks $\bX$, this approach had numerous pleasant features. In this case, soft ``ampleness'' type conditions can be given which allow you to obtain an embedding $f \colon \bX \to \bM$ and moreover, one can recover the stack $\bX$ because the image of $f$ can be described using natural equations and a stability condition. Intuitively, one expects this is possible since one should be able recover the Cox ring of $\bX$ from $\End_X (\cO_X \oplus \cL_1 \oplus \ldots \oplus \cL_s)$ if one incorporates enough line bundles. 
+
+We re-interpret the work there as follows. Fix a finite set of vertices $Q_0$ and a dimension vector $\vec{d} \in\bN^{Q_0}$. We define $PGL = PGL(\vec{d}):= \prod GL(d_i)/\Delta$  where $\Delta$ is the diagonal copy of $\bG_m$. Note that given any quiver $Q= (Q_0,Q_1)$ with relations $I \triangleleft kQ$, the rigidified moduli stack of dimension vector $\vec{d}$ modules over $A = kQ/I$ is naturally the quotient of some affine scheme $\Rep(Q,\vec{d})$ by $PGL$. Here $\Rep(Q,\vec{d})$ parametrises $A$-modules with chosen bases and $PGL$ is the group of change of bases modulo scalars. Let $G \leq PGL(\vec{d})$ be a closed subgroup. 
+
+For toric stacks as in \cite{Abd}, $\vec{d} = \vec{1}$ so $PGL(\vec{d})$ is some torus $\bT$ whose dual $\bT^{\vee}$ can be identified with the corank 1 lattice in $\bZ^{Q_0}$ spanned by differences $\bfe_v - \bfe_w, v,w \in Q_0$ of standard basis vectors $\bfe_v$. Consider now a global $G$-quotient $\bX = [\Spec R/ G]$  where  $R$ is a commutative $k$-algebra of finite type. Then $\bX$ gives a quiver $Q = (Q_0,Q_1)$ with relations as follows. Fix a distinguished vertex $v_0$ and note that the inclusion $G \hto \bT$ induces a surjection $\pi \colon \bT^{\vee} \to G^{\vee}$. We have a map $Q_0 \to \Pic (\bX) \colon v \mapsto \cL_v$ where $\cL_v$ is the line bundle corresponding to the $G$-equivariant $R$-module $\pi(\bfe_v - \bfe_{v_0}) \otimes R$ (so in particular $\cL_{v_0} = \cO_{\bX}$). Then $A = \End_X (\oplus_{v \in Q_0} \cL_v)$ has the form $kQ/I$ for some appropriate set of edges and relations and $\oplus_{v \in Q_0} \pi(\bfe_v - \bfe_{v_0}) \otimes R$ is a $G$-equivariant flat family (over $R$) of representations of $Q$ satisfying the relations in $I$. We thus obtain a $G$-equivariant morphism $\tilde{f} \colon \Spec R \to \Rep(Q,\vec{d})$. Our goal here is to take the $G$-quotient of this morphism and furthermore express $\Rep(Q,\vec{d})/G$ as the moduli stack of some appropriate moduli problem. The re-interpretation of \cite{Abd}, is to realise 
+$$ \Rep(Q,\vec{d})/G = \left(\Rep(Q,\vec{d}) \times (\bT/G) \right)/\bT,$$
+and to add refinement data which corresponds to a point of $\bT/G$ and such that $\bT$ acts on it in a way that is compatible with its action on $\Rep(Q,\vec{d})$ via change of basis. 
+
+In this manuscript, we wish to look at the case of non-abelian stabilisers where some of the line bundles may now be arbitrary rank vector bundles and $\vec{d}$ is not necessarily $\vec{1}$. The key question is to construct a modular realisation of $\PGL/G$ as a $PGL$-equivariant scheme such that the $PGL$-action is compatible with the one given on $\Rep(Q,\vec{d})$. To solve this problem, we develop a monoidal categorical re-interpretation of the theory of refinement data in \cite{Abd}. 
+
+\textbf{Standing Assumptions} Throughout, we work over an algebraically closed base field $k$ of characteristic zero. In particular, all categories are $k$-linear as are all functors and natural transformations.
+
+\section{Background on Symmetric Monoidal Categories}  \label{sec:Monoidal}
+
+We will be especially interested in the categories $\Rep(G)$ of finite dimensional representations of a reductive algebraic group $G$ and $\Coh(\bX)$ of coherent sheaves on a (quasi-separated, quasi-compact???) Deligne-Mumford stack $\bX$. These are examples of $k$-linear abelian rigid symmetric monoidal categories, and the purpose of this section is to fix the categorical terminology and notation we will use. For the most part, we will follow \cite{EGNO} and \cite{MacL}, but since all our braided monoidal categories are actually symmetric, we will replace the adjective braided with symmetric. 
+
+We assume the reader is familiar with the notions of a $k$-linear and abelian category. All our categories are assumed to be $k$-linear, and functors are linear too. A monoidal category {\sf C} comes equipped with a bifunctor $\otimes \colon {\sf C} \times {\sf C} \to {\sf C}$ called the {\em tensor product} which is associative up to a natural isomorphism $\alpha_{U,V,W} \colon U \otimes (V \otimes W) \to (U \otimes V) \otimes W$ called the {\em associator} which is part of the data of the monoidal category. The associator satisfies a {\em pentagonal condition} \cite[VII]{MacL}. In line with our standing assumption that all functors are linear, the tensor product is bilinear on morphisms. There is also a {\em unit} object $\mathbf{1} \in {\sf C}$ and natural isomorphisms $\lambda \colon \mathbf{1} \otimes(?) \to \id, \ \rho \colon (?) \otimes \mathbf{1} \to \id$ which are compatible with the associator as in \cite[VII.1.(7)]{MacL} and $\lambda_{\mathbf{1}} = \rho_{\mathbf{1}}$. 
+
+A {\em symmetric} monoidal category comes further equipped with a {\em braiding}, that is isomorphisms $\tau_{V,W} \colon V \otimes W \xto{\sim} W \otimes V$ which are natural in $V,W$ and compatible with the associator and unit as per \cite[XI.1.(6),(7)]{MacL}. The braiding is to be {\em symmetric} in the sense that $\tau_{W,V} \tau_{V,W} = \id$ for all $V, W \in {\sf C}$. In this case, given any $V \in {\sf C}$, the tensor power $V^{\otimes n}$ is naturally an $S_n$-module where $S_n$ is the symmetric group on $n$ letters. In particular, given any partition $\mu$ on $n$, there is a {\em Young symmetriser} $c_{\mu} \in kS_n$ which is a scalar multiple of an idempotent, so $V^{\otimes n}c_{\mu}$ is a direct summand of $V^{\otimes n}$.
+
+A monoidal category {\sf C} is {\em rigid}  if every object $V$ has a left dual $V^*$ and a right dual $\ ^*V$. Being a {\em left dual} means that there are {\em evaluation} $\text{ev} \colon V^* \otimes V \to \mathbf{1}$ and {\em coevaluation} maps $\text{coev} \colon \mathbf{1} \to V \otimes V^*$ which are compatible with each other and the associator (see \cite[(2.43),(2.44)]{EGNO}). Right duals are defined similarly by switching the order of the  tensor products in the (co)evaluation maps (see \cite[Section~2.10]{EGNO} for more details).
+
+Given two monoidal categories {\sf C, C'}, a {\em monoidal functor} $F = (F,F_2,F_0)$ consists of a functor $F \colon {\sf C} \to {\sf C'}$ together with morphisms i) $F_2(V,W) \colon F(V) \otimes F(W) \to F(V \otimes W)$ natural in $V,W \in {\sf C}$ and ii) $F_0 \colon \mathbf{1}_{\sf C'} \to F(\mathbf{1}_{\sf C})$. They have to satisfy the expected compatibilities with the associator and unit (see \cite[XI.2]{MacL}). The monoidal functor is {\em strong} if further all the $F_2(V,W)$ and $F_0$ are isomorphisms. We should remark that here we depart from \cite{EGNO}, where monoidal functors are by default automotically strong. If the monoidal functor is between symmetric monoidal categories, then we say it is {\em symmetric} if the $F_2(V,W)$ commute with the braidings. 
+
+We collect some basic facts about monoidal functors in the case of interest.
+
+\begin{proposition} \label{prop:isbundle}
+Let $F = (F,F_2,F_0) \colon \Rep(G) \to \Coh(X)$ be a strong monoidal functor. Then 
+\begin{enumerate}
+    \item $F$ preserves images of morphisms.
+    \item $F$ is faithful.
+    \item $F(V)$ is a vector bundle.
+    \item If furthermore, $F$ is symmetric, then $\rank F(V) = \dim V$. 
+\end{enumerate}
+\end{proposition}
+\begin{proof} (1) holds since $\Rep(G)$ is semisimple so every morphism is a composite of a split injection with a split surjection. Furthermore, $F$ is additive so preserves split morphisms. For (2) and (3), note that when $V \neq 0$ we have a surjective evaluation map $V^* \otimes V \to k$. Now $F$ preserves duals so we also obtain a surjection $F(V)^* \otimes F(V) \to F(k) = \cO_X$. For (4), suppose now that $F$ is symmetric and let $a_n \in kS_n$ be the Young symmetriser which induces the projection onto the $n$-th exterior power. Both $V^{\otimes n}$ and $F(V)^{\otimes n}$ are right $S_n$-modules, and right multiplication by $a_n$ is zero iff $\dim V < n$ (respectively, $\textup{rank} F(V) < n$.
+\end{proof}
+
+\section{$G$-torsors via strong monoidal functors}
+
+The category of sections of a quotient stack $\bX : = [X/G]$ over a test scheme $T$ is given by a $G$-torsor $\tilde{T} \to T$ and $G$=equivariant morphism $\tilde{T} \to X$. Thus the study of quotient stacks involves a good understanding of torsors. In this section, we re-interpret the notion of torsors via monoidal functors. This is an elementary consequence of Lurie's version of Tannakian duality \cite{Lurie}, {\red omit this section??} but we make the correspondence explicit in the case we need. 
+
+We fix a reductive algebraic group $G$ so the category $\Rep(G)$ of finite dimensional left $G$-modules over $k$ is a rigid symmetric monoidal category. We also let $X$ be a quasi-compact, quasi-separated (???need more??) scheme and $\Coh X$ be the category of coherent sheaves on $X$.
+
+\begin{theorem}  \label{thm:torsorviamonoid}
+The category of $G$-torsors on $X$ is equivalent to the category of ($k$-linear covariant) symmetric strong monoidal functors $\Rep(G) \to \Coh(X)$. The equivalence is given as follows. Given a $G$-torsor $\pi \colon \tilde{X} \to X$, the corresponding monoidal functor is $V \mapsto \Hom_G(V^*, \pi_* \cO_{\tilde{X}}) = (V \otimes \pi_*\cO_{\tilde{X}})^G$. Conversely, given a symmetric strong monoidal functor $F \colon \Rep(G) \to \Coh(X)$, the corresponding $G$-torsor is given by $\underline{\Spec}_X \cA$ where $\cA = F(\cO(G))$ (notation and structure to be explained in the proof below). 
+\end{theorem}
+\begin{proof}
+Suppose we are given a $G$-torsor $\pi \colon \tilde{X} \to X$. Let $\cA := \pi_* \cO_{\tilde{X}}$. We show that the functor $F:= \Hom_G((?)^*,\cA)$ lifts to a symmetric strong monoidal functor $(F,F_2,F_0)$. Now $\cA$ is an $\cO_{X}$-algebra so there is a morphism $F_0\colon \cO_X \to F(k) = \cA^G = \cO_X$ which is clearly an isomorphism. Also, we define the natural maps $F_2(V,W) \colon F(V) \otimes F(W) \to F(V \otimes W)$ by using the multiplication $\cA \otimes \cA \to \cA$ in the composite below
+\[\begin{split} 
+F_2(V,W) \colon F(V) \otimes F(W) = Hom_G(V^*,\cA) \otimes \Hom_G(W^*, \cA) \to \quad \quad \\
+\quad \quad \Hom_G(V^* \otimes W^*, \cA \otimes \cA) \to \Hom_G(V^* \otimes W^*, \cA) = F(V \otimes W).
+\end{split}\]
+Note that $(F,F_2,F_0)$ is monoidal since associativity and the unit axioms follow from the corresponding algebra axioms on $\cA$. Also, commutativity of $\cA$ ensures that the functor is symmetric. 
+
+It remains to show that $F$ is strong monoidal, by showing that all the $F_2(V,W)$ are isomorphisms. We may check this after passing to an \'etale extension of $X$ and so, since $\tilde{X}$ is a $G$-torsor, assume that $\cA  = \cO(G) \otimes_k \cO_X$ with the $G$-action coming from the natural action on $\cO(G)$. We will need the result below, but first require some notation. Given $V, W \in \Rep(G)$, we let $V|_k$ denote the underlying vector space of $V$ so $V|_k \otimes_k W$ is the $G$-module isomorphic to $W^{\oplus \dim V}$. Let $\{V_{\lambda}\}\subset \Rep(G)$ be a set of representatives for the isomorphism classes of irreducible left $G$-modules and $\pi_{\lambda} \colon G \to GL(V_{\lambda})$ be the corresponding representation. 
+\begin{theorem}  \label{thm:JS}
+There is natural isomorphism of $G$-modules 
+$\cO(G) \simeq \bigoplus_{\lambda}  V_{\lambda}^* \otimes_k V_{\lambda}|_k$ defined by $\phi \in V_{\lambda}^* \otimes_k V_{\lambda}|_k \simeq \End V_{\lambda}$ is mapped to the function $\tr(\phi \pi_{\lambda}(g))$ of $g \in G$.
+\end{theorem}
+\begin{proof}
+This is \cite[\S2, Theorem~7, \S3, Theorem~1]{JS}.
+\end{proof}
+The fact that $F$ is strong monoidal now follows from
+\begin{lemma}  \label{lem:HomOG}
+\begin{enumerate}
+    \item There is a natural isomorphism $\eta_V \colon \Hom_G(V^*,\cO(G))\simeq V$.
+    \item Consider the  monoidal functor $(F,F_2,F_0)$ defined above in the case of the torsor $G \to \Spec k$. The morphism
+    $$ F_2(V,W) \colon \Hom_G(V^*,\cO(G)) \otimes \Hom_G(W^*,\cO(G)) \to \Hom_G(V^* \otimes W^*,\cO(G))$$
+    corresponds via $\eta$ in part (1) to the identity map $V \otimes W \to V \otimes W$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+For part (1), we use the isomorphism in Theorem~\ref{thm:JS}. Then we see we have a natural isomorphism
+$$ \Hom_G(V^*,\cO(G)) \simeq \Hom_G(V^*,\bigoplus_{\lambda}  V_{\lambda}^* \otimes_k V_{\lambda}|_k) = \oplus_{\lambda} \Hom_G(V_{\lambda}, V) \otimes V_{\lambda}|_k \simeq V
+$$
+where the last isomorphism is the usual ``evaluation map''.
+
+{\red Prove part (2) later. Requires knowing the iso in abov thm.}
+\end{proof}
+We now establish the converse map and start with a symmetric strong monoidal functor $F = (F,F_2,F_0) \colon \Rep(G) \to \Coh(X)$. We can extend $F$ to direct limits of objects in $\Rep(G)$ so $\cA := F(\cO(G))$ is a well-defined quasi-coherent sheaf on $X$. Recall that $F$ consumes the left $G$-module structure, and since the right regular action of $G$ on $\cO(G)$ commutes with left, $G$ also acts on $\cA$. Note that $F_2(\cO(G),\cO(G)) \colon \cA \otimes \cA \to \cA$ defines an associative multiplication on $\cA$ and $F_0(\cO(G)) \colon \cO_X \to F(\cO(G))$ is a unit. Furthermore, $\cA$ is commutative since $F$ is symmetric. 
+
+To complete, the converse construction, it remains only to show that $\tilde{X} :=\underline{\Spec}_X \cA$ defines a $G$-torsor on $X$. We know from Proposition~\ref{prop:isbundle}, that $\cA$ is a direct sum of vector bundles so $\tilde{X}$ is flat over $X$. If $\alpha \colon G \times X \to X$ is the $G$-action map and $pr \colon G \times X \to X$ is the projection, we need to show that $(\alpha, pr) \colon G \times X \to G \times X$ is an isomorphism. Dualising, this becomes 
+\begin{equation}  \label{eq:torsor}
+\cA \otimes \cA \to \cO(G) \otimes \cA
+\end{equation}
+To establish this, first note that $G \to \Spec k$ is clearl a $G$-torsor so there is an analogous isomorphism between $G \times G$ with the diagonal action of $G$ and $G \times G$ with the $G$-action on the left factor only. On the dual algebra side, this gives an isomorphism
+$$ \cO(G)|_k \otimes \cO(G) \simeq \cO(G) \otimes \cO(G).
+$$
+Applying $F$ to this isomorphism and the strong monoidal properties recovers the desired isomorphism (\ref{eq:torsor}).
+
+To complete the proof of the theorem, it remains only to show that the functors $\Phi, \Psi$ constructed above are inverse. Note that the $G$-modules $\End V_{\lambda}$ are self-dual. Hence, given a $G$-torsor $\underline{\Spec}_X \cA \to X$, we have natural isomorphisms $\Psi\Phi(\cA) = \oplus_{\lambda} \Hom_G(\End V_{\lambda}, \cA)$. The required natural isomorphism $\Psi\Phi(\cA) \simeq \cA$ thus follows from the natural isomorphism expressing a module $V$ as a direct sum of isotypic compoents
+\begin{equation} \label{eq:isotypic} \bigoplus_{\lambda} V_{\lambda} \otimes \Hom_G(V_{\lambda}, V) \simeq V.
+\end{equation}
+The other natural isomorphism $\Phi\Psi \simeq \id$ is shown similarly by applying $F$ to (\ref{eq:isotypic}).
+\end{proof}
+
+\section{A modular realisation of $PGL/G$ via lifts of monoidal functors}  \label{sec:liftmonoidal}
+
+Let $Q_0$ be a finite set and $\vec{V}:=\{V_v\}$ a  collection of finite dimensional vector spaces indexed by $v \in Q_0$. We define $GL(\vec{V}):= \prod_{v \in Q_0} GL(V_v)$ and $PGL(\vec{V}):= GL(\vec{V})/\Delta$ where $\Delta$ is the diagonal copy of $\bG_m$. Let $V \subset PGL=PGL(\vec{V}$ be a closed subgroup. 
+
+We consider the scheme $PGL/G = \{Gg| g \in PGL\}$ of right cosets of $G$ in $PGL$. Our aim is to express $PGL/G$ as some moduli stack of extra data on the vector spaces $\vec{V}$. Furthermore, $GL$ should act on this data compatibly with its action on $\vec{V}$ and this action should correspond the natural $GL$-action on $PGL/G$. Our approach is based on Lurie's Tannakian duality {\red Would be nice to have alternative approach viewing $PGL/G$ as a type of ``Hilbert scheme'' of $G$-invariant subschemes of $PGL$ which are isomorphic to $G$}
+
+We consider more generally, an inclusion $G \subset P$ of reductive algebraic groups. Recall there are {\em forgetful} or {\em underlying} functors $U^G_P \colon \Rep(P) \to \Rep(G), U_P \colon \Rep(P) \to \text{Vect}(k), U_G \colon \Rep(G) \to \text{Vect}(k)$. 
+\begin{definition}  \label{defn:liftmonoidal}
+A {\em lift} of the symmetric strong monoidal functor $U_P$ to $\Rep(G)$ is a pair $(F,\alpha)$ consisting of a symmetric strong monoidal functor $F \colon \Rep(G) \to \textup{Vect}(k)$ and a natural isomorphism $\alpha \colon F U^G_P \Rightarrow U_P$.
+
+Two lifts $(F,\alpha),(F',\alpha')$ are said to be {\em equivalent} if there is a natural isomorphism $\beta \colon F \Rightarrow F'$ such that $\alpha' = \beta \circ 1_{U^G_P}$ and $\circ$ denotes horizontal composition of natural isomorphisms. 
+\end{definition}
+
+The trivial example of a lift is $(U_G,1)$. 
+
+\begin{proposition}  \label{prop:cosetsaslifts}
+There is a one to one correspondence between equivalence classes of lifts of $U_P$ to $\Rep(G)$ and elements of the homoeneous space $P/G$. 
+\end{proposition}
+\begin{proof}
+Let $(F,\alpha)$ be a lift. Using the category equivalence of  Theorem~\ref{thm:torsorviamonoid}, we see $F$ corresponds to the unique $G$-torsor $G \to \Spec k$. Hence, it is naturally isomorphic to $U_G$. We may thus replace $F$ with $U_G$. The same theorem shows that the possibilities for $\alpha \colon U_G U^G_P = U_P \to U_P$ are just the automorphisms of the trivial $P$-torsor $P \to \Spec k$, that is, $P$ itself. The equivalence classes correspond to orbits under the action $\Aut U_G$. Again, Theorem~\ref{thm:torsorviamonoid} shows that this is $G$ and we are done. 
+\end{proof}
+
+Our next goal is to find a more manageable way to parametrise lifts of monoidal functors. The following assumption helps simplify things.
+\begin{assumption}  \label{ass:issummand}
+We now assume that the inclusion $G \subset P$ is {\em representation dense} in the sense that every finite dimensional $G$-module is a submodule of a finite dimensional $P$-module.
+\end{assumption}
+By Burnside's theorem {\red find REF}, if $G$ is a finite subgroup of $\Aut V$, then, every irreducible $G$-module embeds in some $V^{\otimes n}$ so $G \subset \Aut V$ is representation dense. 
+We consider the category $\Rep(G,P)$ whose objects are finite dimensional $P$-modules and morphisms are $G$-linear maps. There is the obvious inclusion functor $\Utilde \colon \Rep(P) \to \Rep(G,P)$. The symmetric monoidal structure on $\Rep(P)$ extends naturally to $\Rep(G,P)$ to make $\Utilde$ a symmetric strong monoidal functor. 
+
+We let $\Rep'(G)$ be the {\em Karoubi envelope} or {\em idempotent completion} of $\Rep(G,P)$. Following \cite{BNM}, $\Rep'(G)$ consists of pairs $(V,p)$ where $V$ is a $P$-modules and $p \colon V \to V$ is a $G$-linear idempotent. Morphisms $f \colon (V_1,p_1) \to (V_2,p_2)$ consist of morphisms $f \colon V_1 \to V_2$ in $\Rep(G,P)$ such that $fp_1 = f = p_2f$. There is a natural inclusion functor $I \colon \Rep(G,P) \to \Rep'(G)$ and underlying functor $U' \colon \Rep'(G) \to \Rep(G): (V,p) \mapsto \textup{im}\, p$. Moreover, $\Rep'(G)$ is naturally a symmetric monoidal category via the tensor product $(V_1,p_1) \otimes (V_2,p_2) := (V_1 \otimes V_2, p_1 \otimes p_2)$ and the above functors are symmetric strong monoidal functors. 
+
+\begin{proposition}  \label{prop:Repprime}
+Assume that the inclusion $G \subset P$ is representation dense. Then the  underlying functor $U' \colon \Rep'(G) \to \Rep(G)$ is a monoidal equivalence. 
+\end{proposition}
+\begin{proof}
+Note that the representation dense assumption ensures that $U'$ is essentially surjective. The rest of the proposition is an elementary verification of definitions. 
+\end{proof}
+
+It turns out to be better to replace $\Rep(G)$ with $\Rep'(G)$ which then reduces us to considering $\Rep(G,P)$ as follows. 
+\begin{definition}  \label{defn:strictlift}
+A {\em strict lift} of $U_P \colon \Rep(P) \to \textup{Vect}(k)$ to $\Rep(G,P)$ is a symmetric strong monoidal functor $\Ftilde \colon \Rep(G,P) \to \textup{Vect}(k)$ such that $U_P = F\Utilde$. 
+\end{definition}
+Note that every strict lift $\Ftilde$ as above gives a lift $(F,\alpha)$ as in Definition~\ref{defn:liftmonoidal}. Indeed, $\textup{Vect}(k)$ is idempotent complete, so $\Ftilde = F' I$ for some unique functor $F' \colon \Rep(G) \to \textup{Vect}(k)$. Proposition~\ref{prop:Repprime} now yields the required lift $(F,\alpha)$. 
+\begin{proposition}  \label{prop:cosetsasstrictlifts}
+The above rule defines a bijection between strict lifts $\Ftilde$ of $U_P$ to $Rep(G,P)$ and equivalence classes of lifts $(F,\alpha)$ of $U_P$ to $\Rep(G)$. 
+\end{proposition}
+\begin{proof}
+We show that the map is surjective, and then it will be clear from the argument, how to prove injectivity. To this end, consider a lift $(F',\alpha)$ of $U_P$ to $\Rep'(G)$, that is, a symmetric strong monoidal functor $F' \colon \Rep'(G) \to \textup{Vect}(k)$ and natural isomorphism $\alpha \colon F' I \Utilde \Rightarrow U_p$. Note that the set of objects in $\Rep(P)$ and $\Rep(G,P)$ are equal and can be considered a subset of $\Rep'(G)$ so we will write $V$ for both an object in $\Rep(P)$ or its image in $\Rep(G,P)$ or $\Rep'(G)$. With this abuse of notation, we extend the set of isomorphisms $\alpha_V \colon F' I\Utilde (V) \to U_P(V)$ to a set of isomorphisms $\eta_W \colon F'(W) \to A_W$ where $W$, ranges over the objects of $\Rep'(G)$, $A_W \in \textup{Vect}(k)$ and $\eta_V = \alpha_V$ whenever $V$ is also an object of $\Rep(P)$ (so then $A_V = U_P(V)$). We let $F'^{\eta}$ be the symmetric strong monoidal functor defined in the lemma below.
+\begin{lemma}
+Let $G \colon {\sf C} \to {\sf D}$ be a symmetric strong monoidal functor and suppose for each $C \in {\sf C}$ we are given isomorphisms  $\eta_C \colon G(C) \to D_C$ for some object $D_C \in {\sf D}$. There exists a unique symmetric strong monoidal functor $G^{\eta}\colon {\sf C} \to {\sf D}$ such that $\eta$ defines a natural isomorphism $\eta \colon G \Rightarrow G^{\eta}$ of strong monoidal functors. 
+\end{lemma}
+\begin{proof}
+On objects, one defines $G^{\eta}(C) = D_C$. The naturality square defines $G^{\eta}$ on morphisms and compatibility with tensor products defines the ``multiplication'' maps $G^{\eta}_2(C,C') \colon G^{\eta}(C) \otimes G^{\eta}(C') \to G^{\eta}(C \otimes C')$. 
+\end{proof}
+We see that $(F',\alpha)$ is equivalent to $(F'^{\eta},1)$, that is, a ``strict'' lift. This completes the proof of surjectivity and injectivity now follows easily.
+\end{proof}
+
+{\red Tarig: I think we are back now to your original point of view. We think of $\Rep(G,P)$ as generated over $\Rep(P)$ by some extra morphisms $\phi$. Strict lifting $U_P$ amounts to defining the  $\Ftilde(\phi)$ compatibly. The issue now is, what do we mean by relations among the $\phi$ over $\Rep(P)$}
+
+\section{Category extensions via generators and relations}  \label{sec:catext}
+
+In this section, we look at the notion of extending a $k$-linear symmetric monoidal category by adding morphisms called generators, subject to relations. We do not add objects. The goal is to express the category $\Rep(G,PGL)$ in the previous section as such an extension of $\Rep(PGL)$. Presumably, some of the material here is known, but we have been unable to locate a good source. 
+
+We start with a $k$-linear category {\sf C} and a set of {\em indeterminate morphisms} $f_i \colon V_i \to W_i, i \in I$. This just means that the $f_i$ are abstract symbols (like polynomial variables) which do not occur in {\sf C} and associated with each symbol $f_i$ are objects $V_i, W_i \in {\sf C}$. We wish to construct a category denoted ${\sf E} = {\sf C}\langle f_i|i \in I\rangle$ which contains {\sf C} as well as morphisms $f_i \colon V_i \to W_i$ and is minimal such. 
+
+The objects in {\sf E} are the same is in {\sf C} but the morphism space  $\Hom_{\sf E}(V,W)$ is the direct sum of the vector spaces 
+$$
+\Hom_{\sf C}(W_{i_1},W) \otimes_k kf_{i_1} \otimes \Hom_{\sf C}(W_{i_2},V_{i_1}) \otimes_k kf_{i_2} \otimes_k \ldots \otimes_k\Hom_{\sf C}(W_{i_r},V_{i_{r-1}}) \otimes_k kf_{i_r} \otimes_k \Hom_{\sf C}(V,V_{i_r})
+$$
+where $r \geq 0$ and the $i_j$ vary over all the possibilities in $I$. Later, we will introduce a monoidal structure on {\sf C} so to avoid confusion, we will write elements of the above tensor product as a monomial $h_0f_{i_1}h_1 f_{i_2}\ldots h_{i_{r-1}}f_{i_r}h_r$. This reinforces the notion that this is a composition of morphisms in {\sf E} which is more generally defined by concatenation of monomials and the composition in {\sf C}. It is clear that ${\sf E} = {\sf C}\langle f_i|i \in I\rangle$ becomes a $k$-linear category and that there is a $k$-linear inclusion functor ${\sf C} \to {\sf C}\langle f_i\rangle$. It satisfies the expected universal property below so we call it the {\em free linear category generated over {\sf C} by the $f_i$}. We remind the reader that all functors and categories are assumed to be $k$-linear. 
+\begin{proposition} \label{prop:freelinearcat}
+Let {\sf D} be a $k$-linear category. Any functor $F \colon {\sf C} \to {\sf D}$ and choice of morphisms $g_i\colon F(V_i) \to F(W_i)$ induces a unique functor $\Ftilde \colon {\sf C}\langle f_i \rangle \to {\sf D}$ which restricts to $F$ and has $\Ftilde(f_i) = g_i$. 
+\end{proposition}
+
+We now consider relations in a $k$-linear category. Consider a collection a subspaces $I(V,W) < \Hom_{\sf C}(V,W)$ where $V,W$ range over objects of {\sf C}. We say the $I(V,W)$ form an {\em ideal} if it is closed under composition with arbitrary morphisms in the usual way. One can then form a quotient linear category with the same objects but the Hom-spaces are the quotients $\Hom_{\sf C}(V,W)/I(V,W)$. Given a collection of $g_j,g'_j \in \Hom_{\sf C}(V_j,W_j)$ we may consider {\em relations} $g_j = g'_j$ and the smallest ideal $I$ containing the morphisms $g_j - g'_j$. The corresponding quotient is said to be {\em quotient of {\sf C} by the relations $g_j = g'_j$}. It also satisfies the obvious universal property. 
+
+We now suppose that {\sf C} is a monoidal category and consider what is the free monoidal category generated by indeterminate morphisms $f_i \colon V_i \to W_i$. We let $1$ denote the unit in {\sf C} and be sloppy in identifying $1 \otimes (?), (?) \otimes 1$ with the identity functor. The associator in {\sf C} will be denoted $\alpha_{U,V,W} \colon (U \otimes V) \otimes W \xto{\sim} U \otimes (V \otimes W)$. 
+
+Our starting point is the linear category 
+$${\sf C}\langle (1_{V_l} \otimes f_i) \otimes 1_{V_r}\colon (V_l \otimes V_i) \otimes V_r \to (V_l \otimes W_i) \otimes V_r,\ 1_{V_l} \otimes (f_i \otimes 1_{V_r})\colon V_l \otimes (V_i \otimes V_r) \to V_l \otimes (W_i \otimes V_r) \rangle
+$$
+where the generators vary over $i \in I$ and objects $V_l,V_r \in {\sf C}$. We let ${\sf C}\langle f_i\rangle^{\otimes}$ denote the quotient linear category obtained by the following relations
+\begin{eqnarray}  
+\label{eq:associative}
+\alpha_{V_l,W_i,V_r} [(1 \otimes f_i) \otimes 1] & = [1 \otimes (f_i \otimes 1)] \alpha_{V_l,V_i,V_r}
+\\
+\label{eq:commuteleft}
+(1_{V_l\otimes W_i} \otimes g_r) [(1_{V_l} \otimes f_i) \otimes 1_{V_r}] & =  [(1_{V_l} \otimes f_i) \otimes 1_{W_r}](1_{V_l \otimes V_i} \otimes g_r) =: (1 \otimes f_i) \otimes g_r
+\\
+\label{eq:commuteright}
+(g_l \otimes 1_{W_i\otimes V_r}) [1_{V_l} \otimes (f_i \otimes 1_{V_r})] & =  [1_{W_l} \otimes (f_i \otimes 1_{V_r})](g_l \otimes 1_{V_i\otimes V_r}) =: g_l \otimes (f_i \otimes 1).
+\end{eqnarray}
+In (\ref{eq:commuteleft}) either $g_r \colon V_r \to W_r$ is a morphism in {\sf C} or is one of the other generators $(1 \otimes f_j) \otimes 1,1 \otimes (f_j \otimes 1)$ and similarly for (\ref{eq:commuteright}). We call the above relations {\em commutativity relations} and abuse terminology, for exmple by saying $(1 \otimes f_i) \otimes 1$ and $1 \otimes g_r$ {\em commute}. We call (\ref{eq:associative}) an {\em associativity} relation and note that since $\alpha$ is a natural isomorphism, every morphism in ${\sf C}\langle f_i \rangle ^{\otimes}$ can be written as a linear combination of monomials in morphisms in {\sf C} and generators of the form $(1 \otimes f_i) \otimes 1$ (respectively, generators of the form $1 \otimes (f_i \otimes 1)$).
+
+We wish to lift the monoidal category structure on {\sf C} to ${\sf C}\langle f_i \rangle^{\otimes}$. The unit and associator will remain unchanged. The ($k$-blinear) bifunctor $\otimes$ is already defined on objects and we need only extend it to the new morphisms. We start by defining the tensor product of $(1 \otimes f_i) \otimes 1$ with $g_r$ to be the equal composites $(1 \otimes f_i) \otimes (1 \otimes g)$ defined in (\ref{eq:commuteleft}) and similarly for the tensor product $g \otimes [1 \otimes (f_i \otimes 1)] := (g \otimes 1) \otimes (f_i \otimes 1)$. Bilinearity and bifunctoriality of $\otimes$ now forces the definition of $\otimes$ for all morphisms in  ${\sf C}\langle f_i\rangle^{\otimes}$ and the commutativity and associativity relations show that this is in fact well-defined. We have thus constructed the monoidal category ${\sf C}\langle f_i \rangle^{\otimes}$ which satisfies the usual universal property. 
+
+Just as one could quotient $k$-linear categories by ideal, one can quotient monoidal categories by {\em $\otimes$-closed} ideals to construct monoidal categories. 
+
+Finally, suppose now that {\sf C} is a symmetric monoidal category with braiding given by $\tau_{V,W} \colon V \otimes W \xto{\sim} W \otimes V$. Let ${\sf C} \langle f_i \rangle^{\otimes}_{\tau}$ be the quotient monoidal category of ${\sf C} \langle f_i \rangle^{\otimes}$ by the $\otimes$-closed ideal generated by the relations which make $\tau$ natural in all morphisms ${\sf C} \langle f_i \rangle^{\otimes}$. 
+
+
+\bibliographystyle{amsalpha}
+\bibliography{references}
+
+\end{document}
